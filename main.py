@@ -37,9 +37,9 @@ class Weather:
     def monthly_lowest_temperature(self):
         min = 999
         for day_no,day in enumerate(self.days):
-            if day[1] != "":
-                if day[1] < min:
-                    min = day[1]
+            if day[2] != "":
+                if day[2] < min:
+                    min = day[2]
 
         return [min,day_no,self.month]
 
