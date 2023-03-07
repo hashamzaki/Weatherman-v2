@@ -1,6 +1,3 @@
-# PLEASE REVIEW THE CODE
-
-
 import sys
 from os import listdir
 from os.path import join , isfile
@@ -8,148 +5,115 @@ import calendar
 
 
 class Weather:
-
-    def __init__(self, year, month, days):
-        self.year = year
-        self.month = month
-        self.days = days
-
-    def monthly_highest_temperature(self):
-        max = -1
-        for day_no , day in enumerate(self.days):
-
-            if day[0] != "":
-
-                if day[0] > max:
-                    max = day[0]
-
-        return [max, day_no, self.month]
-
-    def monthly_most_humid_day(self):
-        max = -1
-        for day_no,day in enumerate(self.days):
-            if day[7] != "":
-                if day[7] > max:
-                    max = day[7]
-
-        return [max, day_no, self.month]
-
-    def monthly_lowest_temperature(self):
-        min = 999
-        for day_no,day in enumerate(self.days):
-            if day[2] != "":
-                if day[2] < min:
-                    min = day[2]
-
-        return [min,day_no,self.month]
+    def __init__(self, filename, day_data):
+        self.filename = filename
+        self.day_data = day_data
 
 
-weather_data = []
+class Calculations:
+    def __init__(self):
+        self.weather_data=[]
+
+    def find_highest_in_year(self):
+        max_temp = -999
+        day = ""
+        month = ""
+
+        for data in self.weather_data:
+
+            if(data.day_data[0].split('-')[0] == sys.argv[2]) and data.day_data[1] != "":
+
+                if data.day_data[1] > max_temp:
+                    max_temp=data.day_data[1]
+                    month = data.day_data[0].split('-')[1]
+                    day = data.day_data[0].split('-')[2]
+
+        print(f"Highest: {max_temp}C on {calendar.month_abbr[int(month)]} {day} ")
+
+    def find_lowest_in_year(self):
+        min_temp = 999
+        day = ""
+        month = ""
+
+        for data in self.weather_data:
+
+            if (data.day_data[0].split('-')[0] == sys.argv[2]) and data.day_data[3] != "":
+
+                if data.day_data[3] < min_temp:
+                    min_temp = data.day_data[3]
+                    month = data.day_data[0].split('-')[1]
+                    day = data.day_data[0].split('-')[2]
+
+        print(f"Lowest: {min_temp}C on {calendar.month_abbr[int(month)]} {day} ")
+
+    def find_most_humid_in_year(self):
+        max_temp = -999
+        day = ""
+        month = ""
+
+        for data in self.weather_data:
+
+            if(data.day_data[0].split('-')[0] == sys.argv[2]) and data.day_data[8] != "":
+
+                if data.day_data[8] > max_temp:
+                    max_temp = data.day_data[8]
+                    month = data.day_data[0].split('-')[1]
+                    day = data.day_data[0].split('-')[2]
+
+        print(f"Humidity: {max_temp}% on {calendar.month_abbr[int(month)]} {day} ")
 
 
-def parser(file_path):
+def read_one_file(file_path):
 
-    files_list= listdir(file_path)
+    with open(file_path, mode='r') as reader:
+        file_data_line = reader.readlines()
+    file_data_line.insert(1, file_path)
 
-    for file in files_list:
-
-        if isfile(join(file_path,file)):
-            with open(join(file_path,file),mode='r') as reader:
-
-                days = []
-                lines = reader.readlines()
-                year = lines[1].split('-')[0]
-                month = lines[1].split('-')[1]
-
-                for line_no,line in enumerate(lines):
-
-                    if line_no == 0:
-                        pass
-                    else:
-                        values = line.replace('\n','').split(',')[1:]
-                        temp = []
-
-                        for value in values:
-                            try:
-                                temp.append(int(value))
-                            except:
-                                try:
-                                    temp.append(float(value))
-                                except:
-                                    temp.append(value)
-
-                        days.append(temp)
-
-                # if(year=='2008' and month=='12'):
-                #
-                #     print(days)
-                weather_data.append(Weather(year, month, days))
+    return file_data_line
 
 
-def find_highest_in_year():
-    max_temp = -1
-    day = ""
-    month = ""
-    values = []
+def read_all_file(file_path):
 
-    for data in weather_data:
+    files_name_list = listdir(file_path)
+    files_data = []
+    for file_name in files_name_list:
+        files_data.append(read_one_file(join(file_path, file_name)))
 
-        if data.year == sys.argv[2]:
-            values = data.monthly_highest_temperature()
-
-            if values[0] > max_temp:
-                max_temp = values[0]
-                day = values[1]
-                month = values[2]
-
-    print(f"Highest: {max_temp}C on {calendar.month_abbr[int(month)]} {day}")
+    return files_data
 
 
-def find_most_humid_in_year():
-    max_temp = -1
-    day = ""
-    month = ""
-    values = []
+def parser(files_data):
 
-    for data in weather_data:
+    calculation_instance = Calculations()
+    for file_data in files_data:
+        file_name = [file_data[1]]
+        for line in file_data[2:]:
 
-        if data.year == sys.argv[2]:
-            values = data.monthly_most_humid_day()
+            values = line.replace('\n', '').split(',')[1:]
 
-            if values[0] > max_temp:
-                max_temp = values[0]
-                day = values[1]
-                month = values[2]
+            day_data = [line.split(',')[0]]
 
-    print(f"Humidity: {max_temp}% on {calendar.month_abbr[int(month)]} {day}")
+            for value in values:
 
-def find_lowest_in_year():
-    min_temp = 999
-    day = ""
-    month = ""
-    values = []
+                if value.replace('-', '').isdigit():
+                    day_data.append(int(value))
+                elif value.replace('.', '', 1).replace('-', '').isdigit():
+                    day_data.append(float(value))
+                else:
+                    day_data.append(value)
 
-    for data in weather_data:
+            calculation_instance.weather_data.append(Weather(file_name, day_data))
 
-        if data.year == sys.argv[2]:
-            values = data.monthly_lowest_temperature()
-
-            if values[0] < min_temp:
-                min_temp = values[0]
-                day = values[1]
-                month = values[2]
-
-    print(f"Highest: {min_temp}C on {calendar.month_abbr[int(month)]} {day}")
+    return calculation_instance
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
-    parser('/home/faran/Downloads/weatherfiles (1)/weatherfiles')
-
     if sys.argv[1] == '-e':
-        find_highest_in_year()
-        find_lowest_in_year()
-        find_most_humid_in_year()
+        files_data = read_all_file('/home/faran/Downloads/weatherfiles (1)/weatherfiles')
+        calculation_instance = parser(files_data)
+        calculation_instance.find_highest_in_year()
+        calculation_instance.find_lowest_in_year()
+        calculation_instance.find_most_humid_in_year()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
