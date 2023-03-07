@@ -1,6 +1,7 @@
 import sys
 from reader import Reader
 from parser import Parser
+
 if __name__ == '__main__':
 
     if sys.argv[1] == '-e':

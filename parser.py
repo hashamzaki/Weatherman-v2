@@ -5,7 +5,6 @@ from datastructures import WeatherData
 class Parser:
     @staticmethod
     def parser(files_data):
-
         calculation_instance = Calculator()
         for file_data in files_data:
             file_name = [file_data[1]]

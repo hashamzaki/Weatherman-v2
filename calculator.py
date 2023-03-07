@@ -12,9 +12,7 @@ class Calculator:
         max_temperature = float('-inf')
         day = ""
         month = ""
-
         for data in self.weather_data:
-
             if (data.day_data[0].split('-')[0] == sys.argv[2]) \
                     and data.day_data[1] != "" and data.day_data[1] > max_temperature:
 
@@ -28,9 +26,7 @@ class Calculator:
         min_temperature = float('inf')
         day = ""
         month = ""
-
         for data in self.weather_data:
-
             if (data.day_data[0].split('-')[0] == sys.argv[2]) \
                     and data.day_data[3] != "" and data.day_data[3] < min_temperature:
 
@@ -44,9 +40,7 @@ class Calculator:
         max_temperature = float('-inf')
         day = ""
         month = ""
-
         for data in self.weather_data:
-
             if(data.day_data[0].split('-')[0] == sys.argv[2]) \
                     and data.day_data[8] != "" and data.day_data[8] > max_temperature:
 
