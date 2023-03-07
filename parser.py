@@ -3,8 +3,8 @@ from datastructures import WeatherData
 
 
 class Parser:
-    @classmethod
-    def parser(self,files_data):
+    @staticmethod
+    def parser(files_data):
 
         calculation_instance = Calculator()
         for file_data in files_data:
