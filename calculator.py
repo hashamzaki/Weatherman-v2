@@ -5,10 +5,10 @@ import datastructures
 
 
 class Calculator:
-    @classmethod
     def __init__(self):
         self.weather_data: list[datastructures.WeatherData] = []
 
+    @classmethod
     def find_highest_in_year(self):
         max_temperature = float('-inf')
         day = ""
