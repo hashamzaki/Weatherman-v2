@@ -10,13 +10,12 @@ class Parser:
 
     def parse_file_data(self,file_data):
         file_name = [file_data[1]]
-
         for line in file_data[2:]:
             values = line.replace('\n', '').split(',')[1:]
             self.day_data = []
             self.day_data.append(line.split(',')[0])
             for value in values:
-               self.parse_value(value)
+                self.parse_value(value)
 
             self.calculation_instance.weather_data.append(WeatherData(file_name, self.day_data))
 
