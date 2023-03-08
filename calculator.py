@@ -1,6 +1,5 @@
 import calendar
 import sys
-
 import datastructures
 
 
@@ -9,10 +8,9 @@ class Calculator:
         self.weather_data: list[datastructures.WeatherData] = []
 
     def find_highest_in_year(self):
-        max_temperature = -999
+        max_temperature = float('-inf')
         day = ""
         month = ""
-
         for data in self.weather_data:
             if (data.day_data[0].split('-')[0] == sys.argv[2]) \
                     and data.day_data[1] != "" and data.day_data[1] > max_temperature:
