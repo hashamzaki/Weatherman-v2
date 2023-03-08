@@ -1,6 +1,3 @@
-import calendar
-import sys
-
 
 class Calculator:
     @staticmethod
@@ -43,7 +40,6 @@ class Calculator:
                     cls.__year_and_data_validation(data_to_be_compared, data.day_data[0].year, year_to_be_compared)
                     and cls.__comparison_operation(operation_description, data_to_be_compared, comparing_value)
             ):
-                # print('entered')
                 comparing_value = data_to_be_compared
                 month = data.day_data[0].month
                 day = data.day_data[0].day
