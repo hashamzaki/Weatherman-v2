@@ -5,32 +5,30 @@ from datetime import datetime
 
 
 class Parser:
-
-    def __init__(self):
-        self.weather_data: list[WeatherData] = []
-        self.day_data = []
-
-    def parse_file_data(self, file_data, file_name):
+    
+    @classmethod
+    def parse_file_data(cls, file_data, file_name,weather_data):
         for line in file_data[2:]:
             values = line.replace('\n', '').split(',')[1:]
-            self.day_data = []
-            self.day_data.append(datetime.strptime(line.split(',')[0], '%Y-%m-%d'))
+            day_data = [datetime.strptime(line.split(',')[0], '%Y-%m-%d')]
             for value in values:
-                self.parse_value(value)
+                cls.parse_value(value, day_data)
 
-            self.weather_data.append(WeatherData(file_name, self.day_data))
-
-    def parse_value(self, value):
+            weather_data.append(WeatherData(file_name, day_data))
+            
+    @staticmethod
+    def parse_value(value,day_data):
         if utils.is_digit(value):
-            self.day_data.append(int(value))
+            day_data.append(int(value))
         elif utils.is_float(value):
-            self.day_data.append(float(value))
+            day_data.append(float(value))
         else:
-            self.day_data.append(value)
-
-    def parser(self, files_data, files_name):
-
+            day_data.append(value)
+            
+    @classmethod
+    def parser(cls, files_data, files_name):
+        weather_data: list[WeatherData] = []
         for file_data, file_name in zip(files_data, files_name):
-            self.parse_file_data(file_data, file_name)
+            cls.parse_file_data(file_data, file_name, weather_data)
 
-        return self.weather_data
+        return weather_data
