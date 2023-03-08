@@ -3,7 +3,6 @@ import sys
 
 
 class Calculator:
-    # def __init__(self):
     @staticmethod
     def find_highest_in_year(weather_data, year_to_be_compared):
         max_temperature = float('-inf')
