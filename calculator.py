@@ -4,8 +4,8 @@ import sys
 
 class Calculator:
     # def __init__(self):
-    @classmethod
-    def find_highest_in_year(cls, weather_data, year_to_be_compared):
+    @staticmethod
+    def find_highest_in_year(weather_data, year_to_be_compared):
         max_temperature = float('-inf')
         day = ""
         month = ""
@@ -19,8 +19,8 @@ class Calculator:
                 day = data.day_data[0].day
         return {'max_temperature': max_temperature, 'month': month, 'day': day}
 
-    @classmethod
-    def find_lowest_in_year(cls, weather_data, year_to_be_compared):
+    @staticmethod
+    def find_lowest_in_year(weather_data, year_to_be_compared):
         min_temperature = float('inf')
         day = ""
         month = ""
@@ -35,8 +35,8 @@ class Calculator:
 
         return {'min_temperature': min_temperature, 'month': month, 'day': day}
 
-    @classmethod
-    def find_most_humid_in_year(cls, weather_data, year_to_be_compared):
+    @staticmethod
+    def find_most_humid_in_year(weather_data, year_to_be_compared):
         max_humidity = float('-inf')
         day = ""
         month = ""
