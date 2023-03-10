@@ -1,6 +1,6 @@
 from calculator import Calculator
 from data_structures import WeatherData
-import utils
+from utils import is_digit,is_float
 from datetime import datetime
 
 
@@ -20,9 +20,9 @@ class Parser:
 
     @staticmethod
     def parse_value(value, day_data):
-        if utils.is_digit(value):
+        if is_digit(value):
             return int(value)
-        elif utils.is_float(value):
+        elif is_float(value):
             return float(value)
         else:
             return value
