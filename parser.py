@@ -20,12 +20,7 @@ class Parser:
 
     @staticmethod
     def parse_value(value, day_data):
-        if is_digit(value):
-            return int(value)
-        elif is_float(value):
-            return float(value)
-        else:
-            return value
+        return int(value) if is_digit(value) else float(value) if is_float(value) else value
             
     @classmethod
     def parser(cls, files_data_and_names):
