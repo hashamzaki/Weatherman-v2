@@ -17,14 +17,8 @@ def print_most_humid_day(data_to_print):
 
 
 def is_digit(value):
-    if value.replace('-', '').isdigit():
-        return True
-    else:
-        return False
+    return True if value.replace('-', '').isdigit() else False
 
 
 def is_float(value):
-    if value.replace('.', '', 1).replace('-', '').isdigit():
-        return True
-    else:
-        return False
+    return True if value.replace('.', '', 1).replace('-', '').isdigit() else False
