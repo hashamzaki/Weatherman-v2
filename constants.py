@@ -1,0 +1,7 @@
+class MapperIndex:
+    MAX_TEMPERATURE = 1
+    MIN_TEMPERATURE = 3
+    MAX_HUMIDITY = 8
+    DATE_INDEX = 0
+    DATA_TO_SKIP = 1
+    YEAR_IN_FILE_NAME = 2
