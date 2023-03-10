@@ -9,14 +9,14 @@ class Calculator:
         self.weather_data: list(WeatherData) = weather_data
 
     @staticmethod
-    def _year_and_data_validation(data_to_be_compared, data_year, input_year):
+    def _is_year_and_data_valid(data_to_be_compared, data_year, input_year):
         return data_year == input_year and data_to_be_compared
 
     @staticmethod
     def _evaluate_operation_description(operation_description):
-        if operation_description == 'max':
+        if operation_description == MapperIndex.MAX_OPERATION_STRING:
             comparing_value = float('-inf')
-        elif operation_description == 'min':
+        elif operation_description == MapperIndex.MIN_OPERATION_STRING:
             comparing_value = float('inf')
         else:
             raise Exception('invalid operation')
@@ -24,8 +24,11 @@ class Calculator:
         return comparing_value
 
     def _description_based_value_evaluation(
-            self, attribute_index, input_year,
-            value_to_find_description, operation_description
+            self,
+            attribute_index,
+            input_year,
+            value_to_find_description,
+            operation_description
     ):
         comparing_value = self._evaluate_operation_description(operation_description)
         day = ""
@@ -34,7 +37,7 @@ class Calculator:
             data_to_be_compared = data.day_data[attribute_index]
             data_date = data.day_data[MapperIndex.DATE_INDEX]
             if (
-                    self._year_and_data_validation(data_to_be_compared, data_date.year, input_year)
+                    self._is_year_and_data_valid(data_to_be_compared, data_date.year, input_year)
                     and comparison_operation(operation_description, data_to_be_compared, comparing_value)
             ):
                 comparing_value = data_to_be_compared
@@ -44,14 +47,23 @@ class Calculator:
         return {value_to_find_description: comparing_value, 'month': month, 'day': day}
 
     def find_highest_in_year(self, input_year):
-        return self._description_based_value_evaluation(MapperIndex.MAX_TEMPERATURE,
-                                                        input_year, 'max_temperature', 'max')
+        return self._description_based_value_evaluation(
+            MapperIndex.MAX_TEMPERATURE,
+            input_year, 'max_temperature',
+            MapperIndex.MAX_OPERATION_STRING
+        )
 
     def find_lowest_in_year(self, input_year):
-        return self._description_based_value_evaluation(MapperIndex.MIN_TEMPERATURE,
-                                                        input_year, 'min_temperature', 'min')
+        return self._description_based_value_evaluation(
+            MapperIndex.MIN_TEMPERATURE,
+            input_year, 'min_temperature',
+            MapperIndex.MIN_OPERATION_STRING
+        )
 
     def find_most_humid_in_year(self, input_year):
-        return self._description_based_value_evaluation(MapperIndex.MAX_HUMIDITY,
-                                                        input_year, 'max_humidity', 'max')
+        return self._description_based_value_evaluation(
+            MapperIndex.MAX_HUMIDITY,
+            input_year, 'max_humidity',
+            MapperIndex.MAX_OPERATION_STRING
+        )
 

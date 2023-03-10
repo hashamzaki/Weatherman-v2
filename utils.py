@@ -1,4 +1,5 @@
 import calendar
+from constants import MapperIndex
 
 
 def print_highest_temperature(max_temperature, month, day):
@@ -22,9 +23,9 @@ def is_float(value):
 
 
 def comparison_operation(operation_description, data_to_be_compared, comaring_value):
-    if operation_description == 'max':
+    if operation_description == MapperIndex.MAX_OPERATION_STRING:
         return_value = data_to_be_compared > comaring_value
-    elif operation_description == 'min':
+    elif operation_description == MapperIndex.MIN_OPERATION_STRING:
         return_value = data_to_be_compared < comaring_value
     else:
         raise Exception('invalid argument')

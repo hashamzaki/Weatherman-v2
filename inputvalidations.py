@@ -10,11 +10,11 @@ class Validator:
         max_year = min_year = int(list_of_files[0].split('_')[MapperIndex.YEAR_IN_FILE_NAME])
         for file in list_of_files:
             file_year = int(file.split('_')[MapperIndex.YEAR_IN_FILE_NAME])
-            if comparison_operation('max', file_year, max_year):
+            if comparison_operation(MapperIndex.MAX_OPERATION_STRING, file_year, max_year):
                 max_year = file_year
-            elif comparison_operation('min', file_year, min_year):
+            elif comparison_operation(MapperIndex.MIN_OPERATION_STRING, file_year, min_year):
                 min_year = file_year
             else:
                 pass
 
-        return not(input_year > max_year or input_year < min_year)
+        return min_year < input_year < max_year
