@@ -1,6 +1,5 @@
-from calculator import Calculator
 from data_structures import WeatherData
-from utils import is_digit,is_float
+from utils import is_digit, is_float
 from datetime import datetime
 from constants import MapperIndex
 
