@@ -46,3 +46,6 @@ def read_switch():
 def read_year():
     return sys.argv[3]
 
+
+def typcast_year(year):
+    return  int(year) if is_digit(year) else year

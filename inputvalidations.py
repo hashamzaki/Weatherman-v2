@@ -1,14 +1,13 @@
 import sys
 from os import listdir,path
-from utils import comparison_operation, is_digit, read_year, read_file_path
+from utils import comparison_operation, is_digit, read_year, read_file_path,typcast_year
 from constants import MapperIndex
 
 
 class Validator:
     @staticmethod
     def is_year_in_valid_range():
-        input_year = read_year()
-        input_year = int(input_year) if is_digit(input_year) else input_year
+        input_year = typcast_year(read_year())
         list_of_files = listdir(read_file_path())
         max_year = min_year = int(list_of_files[0].split('_')[MapperIndex.YEAR_IN_FILE_NAME])
         for file in list_of_files:
