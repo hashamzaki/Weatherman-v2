@@ -48,4 +48,4 @@ def read_year():
 
 
 def type_cast_year(year):
-    return  int(year) if is_digit(year) else year
+    return int(year) if is_digit(year) else year
