@@ -33,10 +33,10 @@ class Calculator:
         comparing_value = self._evaluate_operation_description(operation_description)
         day = ""
         month = ""
+        year = ""
         for data in self.weather_data:
             data_to_be_compared = data.day_data[attribute_index]
             data_date = data.day_data[MapperIndex.DATE_INDEX]
-
             if not input_year and data_to_be_compared and comparison_operation(
                     operation_description,
                     data_to_be_compared,
@@ -55,7 +55,7 @@ class Calculator:
                 day = data_date.day
                 year = ""
             else:
-                raise Exception("invalid data")
+                pass
 
         return {value_to_find_description: comparing_value, 'month': month, 'day': day, 'year': year}
 

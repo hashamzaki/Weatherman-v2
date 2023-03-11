@@ -1,4 +1,6 @@
 import calendar
+import sys
+
 from constants import MapperIndex
 
 
@@ -31,4 +33,16 @@ def comparison_operation(operation_description, data_to_be_compared, comaring_va
         raise Exception('invalid argument')
 
     return return_value
+
+
+def read_file_path():
+    return sys.argv[1]
+
+
+def read_switch():
+    return sys.argv[2]
+
+
+def read_year():
+    return sys.argv[3]
 

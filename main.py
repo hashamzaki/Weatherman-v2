@@ -1,18 +1,25 @@
 import sys
 from inputvalidations import Validator
-from os import path
 from controller import Controller
-from utils import is_digit
+from utils import read_file_path, read_year, read_switch,is_digit
 
 if __name__ == '__main__':
-    file_path = sys.argv[1]
-    year = sys.argv[3]
-    year = int(year) if is_digit(year) else year
     if (
-            path.isdir(file_path) and sys.argv[2] == '-e' and Validator.year_validation(year, file_path)
+            Validator.is_argument_valid() and read_switch() == '-e' and Validator.is_dir()
+            and Validator.is_year_valid()
     ):
+        year = read_year()
+        year = int(year) if is_digit(year) else year
+        file_path = read_file_path()
         Controller.print_yearly_data(file_path, year)
-    elif path.isdir(file_path) and sys.argv[2] == '-a':
+    elif (
+
+            Validator.is_argument_valid() and read_switch() == '-a'
+            and Validator.is_dir() and Validator.is_year_valid()
+    ):
+        year = read_year()
+        year = int(year) if is_digit(year) else year
+        file_path = read_file_path()
         Controller.print_yearly_data(file_path, year)
     else:
         raise Exception('invalid argument')
