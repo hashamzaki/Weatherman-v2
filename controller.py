@@ -11,11 +11,11 @@ class Controller:
         parsed_data = Parser.parser(files_data_and_name)
         calculator_instance = Calculator(parsed_data)
 
-        max_temperature_data = calculator_instance.find_highest_(year)
+        max_temperature_data = calculator_instance.find_highest(year)
         print_highest_temperature(**max_temperature_data)
 
-        min_temperature_data = calculator_instance.find_lowest_(year)
+        min_temperature_data = calculator_instance.find_lowest(year)
         print_lowest_temperature(**min_temperature_data)
 
-        max_humidity_data = calculator_instance.find_most_humid_(year)
+        max_humidity_data = calculator_instance.find_most_humid(year)
         print_most_humid_day(**max_humidity_data)

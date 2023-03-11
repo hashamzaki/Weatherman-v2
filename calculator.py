@@ -37,7 +37,7 @@ class Calculator:
             data_to_be_compared = data.day_data[attribute_index]
             data_date = data.day_data[MapperIndex.DATE_INDEX]
 
-            if input_year == "" and data_to_be_compared and comparison_operation(
+            if not input_year and data_to_be_compared and comparison_operation(
                     operation_description,
                     data_to_be_compared,
                     comparing_value
@@ -55,24 +55,25 @@ class Calculator:
                 day = data_date.day
                 year = ""
             else:
-                pass
+                raise Exception("invalid data")
+
         return {value_to_find_description: comparing_value, 'month': month, 'day': day, 'year': year}
 
-    def find_highest_(self, input_year):
+    def find_highest(self, input_year):
         return self._description_based_value_evaluation(
             MapperIndex.MAX_TEMPERATURE,
             input_year, 'max_temperature',
             MapperIndex.MAX_OPERATION_STRING
         )
 
-    def find_lowest_(self, input_year):
+    def find_lowest(self, input_year):
         return self._description_based_value_evaluation(
             MapperIndex.MIN_TEMPERATURE,
             input_year, 'min_temperature',
             MapperIndex.MIN_OPERATION_STRING
         )
 
-    def find_most_humid_(self, input_year):
+    def find_most_humid(self, input_year):
         return self._description_based_value_evaluation(
             MapperIndex.MAX_HUMIDITY,
             input_year, 'max_humidity',
