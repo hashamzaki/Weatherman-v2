@@ -9,8 +9,11 @@ class MapperIndex:
     YEAR_IN_FILE_NAME = 2
     MIN_TEMPERATURE = 3
     MAX_HUMIDITY = 8
-    MAX_OPERATION_STRING = 'max'
-    MIN_OPERATION_STRING = 'min'
+
+
+class StringConstants:
+    MAX_OPERATION = 'max'
+    MIN_OPERATION = 'min'
     YEARLY_CALCULATION_SWITCH = '-e'
     All_YEAR_CALCULATION_SWITCH = '-a'
 
